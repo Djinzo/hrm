@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<h1>add employer</h1>
+<form th:action="@{/employer/save}" method="post">
+    <input type="text" name="name" th:value="${employer.name}"/>
+    <input type="text" name="afterName" th:value="${employer.afterName}"/>
+    <input type="text" name="cin" th:value="${employer.cin}"/>
+    <input type="text" name="address" th:value="${employer.address}"/>
+    <input type="text" name="phoneNumber" th:value="${employer.phoneNumber}"/>
+    <input type="text" name="email" th:value="${employer.email}"/>
+    <input type="text" name="post" th:value="${employer.post}"/>
+    <input type="text" name="salaire" th:value="${employer.salary}"/>
+    <input type="text" name="diplom" th:value="${employer.diplom}"/>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
