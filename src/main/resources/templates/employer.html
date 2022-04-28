@@ -1,20 +1,111 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout.html">
 <head>
-
+    <meta charset="UTF-8">
+    <title>hello</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css"  th:src="@{/webjars/bootstrap-icons/font/fonts/bootstrap-icons.scss}"/>
 </head>
-<body>
-<h1>add employer</h1>
-<form th:action="@{/employer/save}" method="post">
-    <input type="text" name="name" th:value="${employer.name}"/>
-    <input type="text" name="afterName" th:value="${employer.afterName}"/>
-    <input type="text" name="cin" th:value="${employer.cin}"/>
-    <input type="text" name="address" th:value="${employer.address}"/>
-    <input type="text" name="phoneNumber" th:value="${employer.phoneNumber}"/>
-    <input type="text" name="email" th:value="${employer.email}"/>
-    <input type="text" name="post" th:value="${employer.post}"/>
-    <input type="text" name="salaire" th:value="${employer.salary}"/>
-    <input type="text" name="diplom" th:value="${employer.diplom}"/>
-    <button type="submit">Save</button>
-</form>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    ajouter employeur
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/employer/save}" method="post">
+                        <div class="form-group">
+                            <label for="formControluid">matricule</label>
+                            <input type="text" disabled class="form-control" id="formControluid" th:value="${employer.uid}">
+                            <input id="uid" th:field="*{employer.uid}" type="hidden"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlName">nom*</label>
+                            <input type="text" name="name" class="form-control" id="formControlName" th:value="${employer.name}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlAfterName">prenom*</label>
+                            <input type="text" name="afterName" class="form-control" id="formControlAfterName" th:value="${employer.afterName}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlCIN">C.I.N*</label>
+                            <input type="text" name="cin" class="form-control" id="formControlCIN" th:value="${employer.cin}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlAddress">adresse</label>
+                            <input type="text" name="address" class="form-control" id="formControlAddress" th:value="${employer.address}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlPhoneNumber">tele*</label>
+                            <input type="text" name="phoneNumber" class="form-control" id="formControlPhoneNumber" th:value="${employer.phoneNumber}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlEmail">email</label>
+                            <input type="email" name="email" class="form-control" id="formControlEmail" th:value="${employer.email}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlPost">post*</label>
+                            <input type="text" name="post" class="form-control" id="formControlPost" th:value="${employer.post}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlSalary">salere</label>
+                            <input type="text" name="salary" class="form-control" id="formControlSalary" th:value="${employer.salary}">
+                        </div>
+                        <div class="form-group">
+                            <label for="formControlDiplom">diplom</label>
+                            <input type="text" name="diplom" class="form-control" id="formControlDiplom" th:value="${employer.diplom}">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    list des employeurs
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">matricule</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">cin</th>
+                            <th scope="col">tele</th>
+                            <th scope="col">email</th>
+                            <th scope="col">post</th>
+                            <th scope="col">action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="employer : ${employerList}">
+                            <td th:text="${employer.uid}"></td>
+                            <td th:text="${employer.name}"></td>
+                            <td th:text="${employer.afterName}"></td>
+                            <td th:text="${employer.cin}"></td>
+                            <td th:text="${employer.phoneNumber}"></td>
+                            <td th:text="${employer.email}"></td>
+                            <td th:text="${employer.post}"></td>
+                            <td>
+                                <div class="row">
+                                    <a th:href="@{/remove(uid=${employer.uid})}"><i></i></a>
+
+                                    <a th:href="@{/edit(uid = ${employer.uid})}">edit</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

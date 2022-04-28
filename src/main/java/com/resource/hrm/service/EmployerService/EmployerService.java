@@ -8,9 +8,15 @@ public interface EmployerService {
 	
 	void addEmployer(Employer employer);
 	
-	void EditEmployer(Employer employer);
+	void editEmployer(Employer employer);
 	
 	void removeEmployer(Employer employer);
 	
 	List<Employer> getAllEmployers();
+	
+	Employer getEmployerById(Long uid);
+	
+	Employer removeEmployerById(Long uid);
+	
+	List<Employer> getActiveEmployers();
 }

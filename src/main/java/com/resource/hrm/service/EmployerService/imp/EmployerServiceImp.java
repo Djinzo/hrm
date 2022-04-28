@@ -21,8 +21,7 @@ public class EmployerServiceImp implements EmployerService {
 	}
 	
 	@Override
-	public void EditEmployer(final Employer employer) {
-		employerRepository.deleteById(employer.getUid());
+	public void editEmployer(final Employer employer) {
 		employerRepository.save(employer);
 	}
 	
@@ -36,4 +35,21 @@ public class EmployerServiceImp implements EmployerService {
 	public List<Employer> getAllEmployers() {
 		return employerRepository.findAll();
 	}
+	
+	@Override
+	public Employer getEmployerById(final Long uid) {
+		return employerRepository.getEmployerByUid(uid);
+	}
+	
+	public  Employer removeEmployerById(final Long uid){
+		Employer employer=getEmployerById(uid);
+		removeEmployer(employer);
+		return employer;
+	}
+	
+	@Override
+	public List<Employer> getActiveEmployers() {
+		return employerRepository.getEmployersByAcitve(true);
+	}
+	
 }

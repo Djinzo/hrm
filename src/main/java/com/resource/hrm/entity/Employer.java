@@ -1,5 +1,6 @@
 package com.resource.hrm.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,8 @@ import java.util.Date;
 public class Employer {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotNull
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private String regestrationNumber;
 	private String name;
 	private String afterName;
