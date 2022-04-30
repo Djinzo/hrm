@@ -2,6 +2,7 @@ package com.resource.hrm.entity;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,9 +16,10 @@ import javax.persistence.OneToOne;
 import java.util.Collection;
 import java.util.Date;
 
+@Builder
 @AllArgsConstructor @NoArgsConstructor @Data
 @Entity
-public class Employer {
+public class Employee {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long uid;
 	@NotNull
@@ -31,7 +33,7 @@ public class Employer {
 	private String phoneNumber;
 	private String email;
 	private String post;
-	private String salary;
+	private Double salary;
 	private Boolean blackListe;
 	private Boolean acitve;
 	private Date lastModification;
@@ -41,5 +43,8 @@ public class Employer {
 	
 	@OneToOne
 	private Depart depart;
+
+	@OneToMany(mappedBy = "employer")
+	private Collection<Discipline> disciplines;
 	
 }

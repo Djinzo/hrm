@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import java.util.Date;
@@ -24,5 +23,5 @@ public class Absance {
 	private String type;
 	
 	@ManyToOne
-	private Employer employer;
+	private Employee employer;
 }

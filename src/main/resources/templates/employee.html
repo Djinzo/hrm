@@ -17,47 +17,47 @@
                     ajouter employeur
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/employer/save}" method="post">
+                    <form th:action="@{/employee/save}" method="post">
                         <div class="form-group">
                             <label for="formControluid">matricule</label>
-                            <input type="text" disabled class="form-control" id="formControluid" th:value="${employer.uid}">
-                            <input id="uid" th:field="*{employer.uid}" type="hidden"/>
+                            <input type="text" disabled class="form-control" id="formControluid" th:value="${employee.uid}">
+                            <input id="uid" th:field="*{employee.uid}" type="hidden"/>
                         </div>
                         <div class="form-group">
                             <label for="formControlName">nom*</label>
-                            <input type="text" name="name" class="form-control" id="formControlName" th:value="${employer.name}">
+                            <input type="text" name="name" class="form-control" id="formControlName" th:value="${employee.name}">
                         </div>
                         <div class="form-group">
                             <label for="formControlAfterName">prenom*</label>
-                            <input type="text" name="afterName" class="form-control" id="formControlAfterName" th:value="${employer.afterName}">
+                            <input type="text" name="afterName" class="form-control" id="formControlAfterName" th:value="${employee.afterName}">
                         </div>
                         <div class="form-group">
                             <label for="formControlCIN">C.I.N*</label>
-                            <input type="text" name="cin" class="form-control" id="formControlCIN" th:value="${employer.cin}">
+                            <input type="text" name="cin" class="form-control" id="formControlCIN" th:value="${employee.cin}">
                         </div>
                         <div class="form-group">
                             <label for="formControlAddress">adresse</label>
-                            <input type="text" name="address" class="form-control" id="formControlAddress" th:value="${employer.address}">
+                            <input type="text" name="address" class="form-control" id="formControlAddress" th:value="${employee.address}">
                         </div>
                         <div class="form-group">
                             <label for="formControlPhoneNumber">tele*</label>
-                            <input type="text" name="phoneNumber" class="form-control" id="formControlPhoneNumber" th:value="${employer.phoneNumber}">
+                            <input type="text" name="phoneNumber" class="form-control" id="formControlPhoneNumber" th:value="${employee.phoneNumber}">
                         </div>
                         <div class="form-group">
                             <label for="formControlEmail">email</label>
-                            <input type="email" name="email" class="form-control" id="formControlEmail" th:value="${employer.email}">
+                            <input type="email" name="email" class="form-control" id="formControlEmail" th:value="${employee.email}">
                         </div>
                         <div class="form-group">
                             <label for="formControlPost">post*</label>
-                            <input type="text" name="post" class="form-control" id="formControlPost" th:value="${employer.post}">
+                            <input type="text" name="post" class="form-control" id="formControlPost" th:value="${employee.post}">
                         </div>
                         <div class="form-group">
                             <label for="formControlSalary">salere</label>
-                            <input type="text" name="salary" class="form-control" id="formControlSalary" th:value="${employer.salary}">
+                            <input type="text" name="salary" class="form-control" id="formControlSalary" th:value="${employee.salary}">
                         </div>
                         <div class="form-group">
                             <label for="formControlDiplom">diplom</label>
-                            <input type="text" name="diplom" class="form-control" id="formControlDiplom" th:value="${employer.diplom}">
+                            <input type="text" name="diplom" class="form-control" id="formControlDiplom" th:value="${employee.diplom}">
                         </div>
                         <button class="btn btn-primary" type="submit">Save</button>
                     </form>
@@ -84,19 +84,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="employer : ${employerList}">
-                            <td th:text="${employer.uid}"></td>
-                            <td th:text="${employer.name}"></td>
-                            <td th:text="${employer.afterName}"></td>
-                            <td th:text="${employer.cin}"></td>
-                            <td th:text="${employer.phoneNumber}"></td>
-                            <td th:text="${employer.email}"></td>
-                            <td th:text="${employer.post}"></td>
+                        <tr th:each="employee : ${employeeList}">
+                            <td th:text="${employee.uid}"></td>
+                            <td th:text="${employee.name}"></td>
+                            <td th:text="${employee.afterName}"></td>
+                            <td th:text="${employee.cin}"></td>
+                            <td th:text="${employee.phoneNumber}"></td>
+                            <td th:text="${employee.email}"></td>
+                            <td th:text="${employee.post}"></td>
                             <td>
                                 <div class="row">
-                                    <a th:href="@{/remove(uid=${employer.uid})}"><i></i></a>
+                                    <a th:href="@{/remove(uid=${employee.uid})}"><i></i></a>
 
-                                    <a th:href="@{/edit(uid = ${employer.uid})}">edit</a>
+                                    <a th:href="@{/edit(uid = ${employee.uid})}">edit</a>
                                 </div>
                             </td>
                         </tr>

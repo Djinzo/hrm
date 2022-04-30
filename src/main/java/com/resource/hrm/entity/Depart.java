@@ -22,5 +22,5 @@ public class Depart {
 	private String motif;
 	
 	@OneToOne
-	private Employer employer;
+	private Employee employer;
 }

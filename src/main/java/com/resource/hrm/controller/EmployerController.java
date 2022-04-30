@@ -1,13 +1,12 @@
 package com.resource.hrm.controller;
 
-import com.resource.hrm.entity.Employer;
-import com.resource.hrm.service.EmployerService.EmployerService;
+import com.resource.hrm.entity.Employee;
+import com.resource.hrm.service.EmployerService.EmployeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,34 +15,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmployerController {
 	
 	@Autowired
-	private EmployerService employerService;
+	private EmployeeService employeeService;
 	
-	@RequestMapping(value = "/employer", method = RequestMethod.GET)
-	public String addEmployer(Model model) {
-		model.addAttribute("employerList", employerService.getActiveEmployers());
-		model.addAttribute("employer", new Employer());
-		return "employer";
+	@RequestMapping(value = "/employee", method = RequestMethod.GET)
+	public String employee(Model model) {
+		model.addAttribute("employeeList", employeeService.getActiveEmployees());
+		model.addAttribute("employee", new Employee());
+		return "employee";
 	}
 	
-	@RequestMapping(value = "/employer/save", method = RequestMethod.POST)
-	public String saveEmployer(Model model, Employer employer) {
+	@RequestMapping(value = "/employee/save", method = RequestMethod.POST)
+	public String saveEmployee(Model model, Employee employer) {
 		employer.setAcitve(true);
-		employerService.editEmployer(employer);
-		model.addAttribute("employer", new Employer());
-		model.addAttribute("employerList", employerService.getActiveEmployers());
-		return "employer";
+		employeeService.editEmployee(employer);
+		model.addAttribute("employee", new Employee());
+		model.addAttribute("employeeList", employeeService.getActiveEmployees());
+		return "employee";
 	}
 	
 	@GetMapping(value = "/remove")
 	public String remove(Long uid) {
-		employerService.removeEmployerById(uid);
-		return "redirect:/employer";
+		employeeService.removeEmployeeById(uid);
+		return "redirect:/employee";
 	}
 	
 	@GetMapping(value = "/edit")
 	public String edit(Model model, @RequestParam("uid") Long uid) {
-		model.addAttribute("employerList", employerService.getActiveEmployers());
-		model.addAttribute("employer", employerService.getEmployerById(uid));
-		return "/employer";
+		model.addAttribute("employeeList", employeeService.getActiveEmployees());
+		model.addAttribute("employee", employeeService.getEmployeeById(uid));
+		return "employee";
 	}
 }
