@@ -37,6 +37,7 @@ public class Employee {
 	private Boolean blackListe;
 	private Boolean acitve;
 	private Date lastModification;
+	private int color;
 	
 	@OneToMany(mappedBy = "employer")
 	private Collection<Absance> absances;

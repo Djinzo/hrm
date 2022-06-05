@@ -17,6 +17,7 @@ public class EmployeeServiceImp implements EmployeeService {
 	
 	@Override
 	public void addEmployee(final Employee employer) {
+		employer.setColor((int)(Math.random() * 0x1000000));
 		employeeRepository.save(employer);
 	}
 	

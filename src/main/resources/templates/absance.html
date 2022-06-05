@@ -3,25 +3,16 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout.html">
 <head>
     <meta charset="UTF-8">
-    <title>hello</title>
+    <title>PIPSI huMAN</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" type="text/css" th:src="@{/webjars/bootstrap-icons/font/fonts/bootstrap-icons.scss}"/>
-    <link rel="stylesheet" th:src="@{/webjars/fullcalendar/main.css}"/>
     <script type="text/javascript" th:src="@{/webjars/fullcalendar/main.min.js}"></script>
+    <link th:href="@{/webjars/fullcalendar/main.min.css}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" th:src="@{/webjars/bootstrap-icons/font/bootstrap-icons.scss}"/>
 
-    <script>
+    <script type="text/javascript" th:src="@{/fullcalendar/full.js}"></script>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-            });
-            calendar.render();
-        });
-
-    </script>
 </head>
 <div layout:fragment="content">
     <div class="row">
@@ -29,12 +20,23 @@
             <div id='calendar'></div>
         </div>
         <div class="col-md-4">
-            <label for="inputEmployee" class="form-label">Employé</label>
-            <select name="employee" class="form-control" aria-label="employeur" id="inputEmployee">
-                <option>sélectionner un employé</option>
-                <option th:each="employee : ${employeeList}" th:value="${employee.uid}"
-                        th:text="${employee.afterName} + ' ' +  ${ employee.name} + ' (' + ${employee.cin} + ')'"></option>
-            </select>
+                <label for="inputEmployee" class="form-label">Employé</label>
+                <select name="employee" class="form-control" aria-label="employeur" id="inputEmployee">
+                    <option>sélectionner un employé</option>
+                    <option th:each="employee : ${employeeList}" th:value="${employee.uid}"
+                            th:text="${employee.afterName} + ' ' +  ${ employee.name} + ' (' + ${employee.cin} + ')'"></option>
+                </select>
+
+                <label for="absancetype" class="form-label">type d'absence</label>
+                <select name="employee" class="form-control" aria-label="employeur" id="absancetype">
+                    <option>select absance type</option>
+                    <option th:each="absance : ${absanceTypeList}" th:value="${absance.uid}"
+                            th:text="${absance.type}"></option>
+                </select>
+                <label for="Descreption">description</label>
+                <textarea class="form-control" id="Descreption" rows="3"></textarea>
+                <button  class="btn btn-success" id="addAbsent">add</button>
+
         </div>
     </div>
 </div>
