@@ -97,6 +97,15 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.webjars.npm/fullcalendar -->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>fullcalendar</artifactId>
+            <version>5.11.0</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>

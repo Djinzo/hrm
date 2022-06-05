@@ -7,22 +7,36 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" type="text/css"  th:src="@{/webjars/bootstrap-icons/font/fonts/bootstrap-icons.scss}"/>
+    <link rel="stylesheet" type="text/css" th:src="@{/webjars/bootstrap-icons/font/fonts/bootstrap-icons.scss}"/>
 </head>
 <div layout:fragment="content">
 
     <div class="col-md-4">
-        <form>
-           <select class="form-select" aria-label="employeur">
-               <option selected="selected">sélectionner un employé</option>
-               <option th:each="employee : ${employeeList}" th:value="${employee.uid}" th:text="${employee.afterName} + ' ' +  ${ employee.name} + ' (' + ${employee.cin} + ')'"></option>
-           </select>
-            <button class="btn btn-primary" type="submit">Save</button>
+        <form th:action="@{/discipline/add}" method="post">
+            <div class="mb-3">
+                <label for="inputEmployee" class="form-label">Employé</label>
+                <select name="employee" class="form-control" aria-label="employeur" id="inputEmployee">
+                    <option>sélectionner un employé</option>
+                    <option th:each="employee : ${employeeList}" th:value="${employee.uid}"
+                            th:text="${employee.afterName} + ' ' +  ${ employee.name} + ' (' + ${employee.cin} + ')'" th:selected="${discipline.employee != null}? ${discipline.employee} == ${employee.uid} : false"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="innputAvertissment" class="form-label">Advertisement</label>
+                <input type="text" name="avertissment" class="form-control" id="innputAvertissment"
+                       th:value="${discipline.avertissment}">
+            </div>
+
+            <div class="mb-3">
+                <label for="innputdateAvvert" class="form-label">date Advertisement</label>
+                <input type="date" name="dateAvvert" class="form-control" id="innputdateAvvert"
+                       th:value="${discipline.dateAvvert}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header bg-primary text-white">
                     list des employeurs
@@ -52,7 +66,7 @@
                             <td th:text="${employee.post}"></td>
                             <td>
                                 <div class="row">
-                                    <a th:href="@{/remove(uid=${employee.uid})}">show</a>
+                                    <a class="btn btn-success" th:href="@{/view(uid = ${employee.uid})}">affiche</a>
                                 </div>
                             </td>
                         </tr>
@@ -61,7 +75,40 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    discipline par employer
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Employé</th>
+                            <th scope="col">Advertisement</th>
+                            <th scope="col">date Advertisement</th>
+                            <th scope="col">action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="disp : ${disciplines}">
+                            <td th:text="${disp.employer.cin}"></td>
+                            <td th:text="${disp.avertissment}"></td>
+                            <td th:text="${#dates.format(disp.dateAvvert, 'dd/MM/yyyy')}"></td>
+                            <td>
+                                <a class="btn btn-danger" th:href="@{/removeDiscipline(uid=${disp.uid})}">remove</a>
+                                <a class="btn btn-success" th:href="@{/editDiscipline(uid=${disp.uid})}">edit</a>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 </body>
 </html>

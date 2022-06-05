@@ -47,4 +47,14 @@ public class DisciplineServiceImp implements DisciplineService {
     public void editDeciplien(Discipline discipline) {
         disciplineRepository.save(discipline);
     }
+
+    @Override
+    public List<Discipline> getDisciplines() {
+        return disciplineRepository.findAll();
+    }
+
+    @Override
+    public Discipline getDisciplineById(Long uid) {
+        return disciplineRepository.getById(uid);
+    }
 }

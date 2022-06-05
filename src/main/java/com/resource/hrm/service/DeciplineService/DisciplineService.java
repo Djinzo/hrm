@@ -16,4 +16,7 @@ public interface DisciplineService {
 
     void editDeciplien(Discipline discipline);
 
+    List<Discipline> getDisciplines();
+
+    Discipline getDisciplineById(Long uid);
 }
