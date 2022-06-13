@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor @NoArgsConstructor @Data
 public class AbsanceJsonRespance {
+    private String uid;
     private String emploeeID;
     private String absanceID;
     private String discreption;

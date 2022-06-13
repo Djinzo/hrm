@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <link rel="stylesheet" type="text/css"  th:src="@{/webjars/bootstrap-icons/font/fonts/bootstrap-icons.scss}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.scss}"/>
 </head>
 <div layout:fragment="content">
     <div class="row">
@@ -94,9 +94,9 @@
                             <td th:text="${employee.post}"></td>
                             <td>
                                 <div class="row">
-                                    <a th:href="@{/remove(uid=${employee.uid})}"><i></i></a>
+                                        <a class="btn btn-danger" th:href="@{/remove(uid=${employee.uid})}"><i class="bi bi-plus-lg">remove</i></a>
 
-                                    <a th:href="@{/edit(uid = ${employee.uid})}">edit</a>
+                                    <a class="btn btn-primary" th:href="@{/edit(uid = ${employee.uid})}">edit</a>
                                 </div>
                             </td>
                         </tr>

@@ -25,4 +25,16 @@ public class AbsanceServiceImpl implements AbsanceService {
     public void addAbsance(Absance absance) {
         absanceRepository.save(absance);
     }
+
+    @Override
+    public Absance getAbsanceById(Long id) {
+        return absanceRepository.getById(id);
+    }
+
+    @Override
+    public void removeAbsance(long id) {
+        absanceRepository.delete(absanceRepository.getById(id));
+    }
+
+
 }

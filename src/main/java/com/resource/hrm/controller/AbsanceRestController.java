@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 public class AbsanceRestController {
@@ -43,8 +44,33 @@ public class AbsanceRestController {
         String discreption=json.getDiscreption();
         Date start = simpleDateFormat.parse(json.getStart());
         Date end = simpleDateFormat.parse(json.getEnd());
+        Absance result =Absance.builder().absanceType(absanceType).employer(employee).endDate(end).startDate(start).note(discreption).build();
+        if(!Objects.isNull(json.getUid()) ){
+            result.setUid(Long.valueOf(json.getUid()));
+        }
+        absanceService.addAbsance(result);
+    }
 
-        absanceService.addAbsance(Absance.builder().absanceType(absanceType).employer(employee).endDate(end).startDate(start).note(discreption).build());
+    @RequestMapping(value = "/get/absance",method = RequestMethod.POST)
+    public AbsanceJsonRespance getAbsance(@RequestBody long id) {
+        return convertAbsanceJson(absanceService.getAbsanceById(id));
+    }
+
+    @RequestMapping(value = "/remove/absance",method = RequestMethod.POST)
+    public void removeAbsance(@RequestBody long id) {
+        absanceService.removeAbsance(id);
+    }
+
+    public AbsanceJsonRespance convertAbsanceJson(Absance absance){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return AbsanceJsonRespance.builder()
+                .absanceID(String.valueOf(absance.getUid()))
+                .emploeeID(String.valueOf(absance.getEmployer().getUid()))
+                .discreption(absance.getNote())
+                .end(simpleDateFormat.format(absance.getEndDate()))
+                .start(simpleDateFormat.format(absance.getStartDate()))
+                .uid(String.valueOf(absance.getUid()))
+                .build();
     }
 
     public List<AbsanceJson> convertAbsance(List<Absance> absances){
