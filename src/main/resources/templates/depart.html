@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout.html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.scss}"/>
+</head>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form th:action="@{/depart/save}" method="post">
+                <div class="form-group">
+                    <label for="inputEmployee" class="form-label">Employé</label>
+                    <select name="employee" class="form-control" aria-label="employeur" id="inputEmployee">
+                        <option>sélectionner un employé</option>
+                        <option th:each="employee : ${employeeList}" th:value="${employee.uid}"
+                                th:text="${employee.afterName} + ' ' +  ${ employee.name} + ' (' + ${employee.cin} + ')'"
+                                    ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="formControldapratDate">date de daprat</label>
+                    <input type="date" name="dateDepart" class="form-control" id="formControldapratDate"
+                           th:value="${depart.dateDepart}">
+                </div>
+                <div class="form-group">
+                    <label for="formControlMotif">motif</label>
+                    <input type="text" name="motif" class="form-control" id="formControlMotif"
+                           th:value="${depart.motif}">
+                </div>
+                <button class="btn btn-primary" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                    </svg>
+                </button>
+            </form>
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    list des employeurs
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">matricule</th>
+                            <th scope="col">nom</th>
+                            <th scope="col">prenom</th>
+                            <th scope="col">cin</th>
+                            <th scope="col">tele</th>
+                            <th scope="col">email</th>
+                            <th scope="col">post</th>
+                            <th scope="col">action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="employee : ${employeeList}">
+                            <td th:text="${employee.uid}"></td>
+                            <td th:text="${employee.name}"></td>
+                            <td th:text="${employee.afterName}"></td>
+                            <td th:text="${employee.cin}"></td>
+                            <td th:text="${employee.phoneNumber}"></td>
+                            <td th:text="${employee.email}"></td>
+                            <td th:text="${employee.post}"></td>
+                            <td>
+                                <div class="row">
+                                    <a class="btn btn-primary" th:href="@{/editdepart(uid = ${employee.uid})}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

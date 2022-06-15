@@ -1,5 +1,6 @@
 package com.resource.hrm.controller;
 
+import com.resource.hrm.entity.Depart;
 import com.resource.hrm.entity.Employee;
 import com.resource.hrm.service.EmployerService.EmployeeService;
 
@@ -20,7 +21,9 @@ public class EmployerController {
 	@RequestMapping(value = "/employee", method = RequestMethod.GET)
 	public String employee(Model model) {
 		model.addAttribute("employeeList", employeeService.getActiveEmployees());
-		model.addAttribute("employee", new Employee());
+		Employee employee = new Employee();
+		employee.setDepart(new Depart());
+		model.addAttribute("employee", employee);
 		return "employee";
 	}
 	

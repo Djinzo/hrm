@@ -45,7 +45,7 @@ public class AbsanceRestController {
         Date start = simpleDateFormat.parse(json.getStart());
         Date end = simpleDateFormat.parse(json.getEnd());
         Absance result =Absance.builder().absanceType(absanceType).employer(employee).endDate(end).startDate(start).note(discreption).build();
-        if(!Objects.isNull(json.getUid()) ){
+        if(!"".equals(json.getUid())){
             result.setUid(Long.valueOf(json.getUid()));
         }
         absanceService.addAbsance(result);
