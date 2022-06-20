@@ -11,7 +11,13 @@ import com.resource.hrm.service.EmployerService.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.resource.hrm.controller.json.AbsanceJson;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +43,7 @@ public class AbsanceRestController {
     }
 
     @RequestMapping(value = "/add/absance",method = RequestMethod.POST)
-    public void addList(@RequestBody AbsanceJsonRespance json) throws ParseException {
+    public Long addList(@RequestBody AbsanceJsonRespance json) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Employee employee = employeeService.getEmployeeById(Long.valueOf(json.getEmploeeID()));
         AbsanceType absanceType = absanceTypeService.getAbsanceTypeById(Long.valueOf(json.getAbsanceID()));
@@ -49,7 +55,17 @@ public class AbsanceRestController {
             result.setUid(Long.valueOf(json.getUid()));
         }
         absanceService.addAbsance(result);
+        return  result.getUid();
     }
+
+
+    @PostMapping("/save/doc")
+    public void document(@RequestBody MultipartFile file,@RequestParam("id") String id) throws IOException {
+        Files.deleteIfExists(Paths.get(System.getProperty("user.home") + "/Docs").resolve(id+".pdf"));
+        Files.copy(file.getInputStream(), Paths.get(System.getProperty("user.home") + "/Docs").resolve(id+".pdf"));
+
+    }
+
 
     @RequestMapping(value = "/get/absance",method = RequestMethod.POST)
     public AbsanceJsonRespance getAbsance(@RequestBody long id) {
@@ -86,5 +102,13 @@ public class AbsanceRestController {
             absanceJsons.add(absanceJson);
         }
         return absanceJsons;
+    }
+
+    @GetMapping("/document/{id}")
+    public byte[] getDocument(@PathVariable("id") Long id) throws IOException {
+        File file = new File(System.getProperty("user.home") + "/Docs/" + id + ".pdf");
+        System.out.println(System.getProperty("user.home") + "\\vid\\" + id + ".pdf");
+        Path path = Paths.get(file.toURI());
+        return Files.readAllBytes(path);
     }
 }

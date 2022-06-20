@@ -11,7 +11,12 @@
     <link th:href="@{/webjars/fullcalendar/main.min.css}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.scss}"/>
 
+
+    <script type="text/javascript" th:src="@{/pdfjs/lib/webviewer.min.js}"></script>
     <script type="text/javascript" th:src="@{/fullcalendar/full.js}"></script>
+    <script type="text/javascript" th:src="@{/index.js}"></script>
+    <script>
+    </script>
 
 </head>
 <div layout:fragment="content">
@@ -36,6 +41,9 @@
             </select>
             <label for="Descreption">description</label>
             <textarea class="form-control" id="Descreption" rows="3"></textarea>
+
+            <input type="file" id="absanceFile" onchange="handleFiles(this.files)" >
+
             <button class="btn btn-success" id="addAbsent">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                      fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
@@ -43,8 +51,8 @@
                 </svg>
             </button>
             <button class="btn btn-danger" id="removeAbsance">remove</button>
-
-        </div>
+            <div id='viewer' style="overflow: hidden;height: 700px;"></div>
+    </div>
     </div>
 </div>
 

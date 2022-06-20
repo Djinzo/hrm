@@ -10,7 +10,6 @@ import java.util.List;
 
 
 
-@RepositoryRestResource
-@CrossOrigin("*")
+
 public interface AbsanceRepository extends JpaRepository<Absance,Long> {
 }

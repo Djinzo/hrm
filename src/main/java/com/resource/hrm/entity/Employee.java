@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor @NoArgsConstructor @Data
@@ -42,8 +43,8 @@ public class Employee {
 	@OneToMany(mappedBy = "employer")
 	private Collection<Absance> absances;
 	
-	@OneToOne
-	private Depart depart;
+	@OneToMany
+	private List<Depart> depart;
 
 	@OneToMany(mappedBy = "employer")
 	private Collection<Discipline> disciplines;

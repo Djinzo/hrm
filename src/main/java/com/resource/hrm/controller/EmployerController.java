@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class EmployerController {
 	
@@ -22,7 +25,9 @@ public class EmployerController {
 	public String employee(Model model) {
 		model.addAttribute("employeeList", employeeService.getActiveEmployees());
 		Employee employee = new Employee();
-		employee.setDepart(new Depart());
+		List<Depart> departList = new ArrayList<>();
+		departList.add(new Depart());
+		employee.setDepart(departList);
 		model.addAttribute("employee", employee);
 		return "employee";
 	}

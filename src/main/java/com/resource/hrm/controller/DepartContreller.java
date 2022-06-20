@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -35,7 +37,6 @@ public class DepartContreller {
     @PostMapping(value = "/depart/save")
     public String depart(Model model, DepartForm depart){
         Employee e = employeeService.getEmployeeById(depart.getEmployee());
-        e.setDepart(convertDepart(depart));
         employeeService.addEmployee(e);
         departService.saveDepart(convertDepart(depart));
         model.addAttribute("depart",convertDepart(depart));
@@ -51,7 +52,9 @@ public class DepartContreller {
     public String edit(Model model, @RequestParam("uid") Long uid) {
         model.addAttribute("employeeList", employeeService.getActiveEmployees());
         if(Objects.isNull(employeeService.getEmployeeById(uid).getDepart())){
-            employeeService.getEmployeeById(uid).setDepart(new Depart());
+            List<Depart> departList = new ArrayList<>();
+            departList.add(new Depart());
+            employeeService.getEmployeeById(uid).setDepart(departList);
         }
 
         model.addAttribute("depart", employeeService.getEmployeeById(uid).getDepart());

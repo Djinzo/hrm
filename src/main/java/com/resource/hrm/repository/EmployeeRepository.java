@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import java.util.List;
 
 
-@RepositoryRestResource
-@CrossOrigin("*")
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 	public Employee getEmployeeByUid(Long Uid);
 	
