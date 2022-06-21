@@ -10,7 +10,8 @@ import java.util.List;
 
 
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
-	public Employee getEmployeeByUid(Long Uid);
+	Employee getEmployeeByUid(Long Uid);
 	
-	public List<Employee> getEmployeesByAcitve(Boolean isActive);
+	List<Employee> getEmployeesByAcitve(Boolean isActive);
+
 }

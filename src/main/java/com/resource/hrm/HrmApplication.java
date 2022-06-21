@@ -1,13 +1,7 @@
 package com.resource.hrm;
 
-import com.resource.hrm.entity.Absance;
-import com.resource.hrm.entity.AbsanceType;
-import com.resource.hrm.entity.Discipline;
-import com.resource.hrm.entity.Employee;
-import com.resource.hrm.repository.AbsanceRepository;
-import com.resource.hrm.repository.AbsanceTypeRepository;
-import com.resource.hrm.repository.DisciplineRepository;
-import com.resource.hrm.repository.EmployeeRepository;
+import com.resource.hrm.entity.*;
+import com.resource.hrm.repository.*;
 import com.resource.hrm.service.AbsanceTypeService.AbsanceTypeService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,7 +20,7 @@ public class HrmApplication {
 
 
 	@Bean
-	CommandLineRunner start(EmployeeRepository employerRepository, DisciplineRepository disciplineRepository, AbsanceTypeRepository absanceTypeRepository, AbsanceRepository absanceRepository){
+	CommandLineRunner start(EmployeeRepository employerRepository, DisciplineRepository disciplineRepository, AbsanceTypeRepository absanceTypeRepository, AbsanceRepository absanceRepository, DepartRepository departRepository){
 		return args -> {
 
 			//adding some date to test
@@ -56,6 +50,8 @@ public class HrmApplication {
 			Date today = new Date();
 			Date nextDay = new Date(today.getTime() + MILLIS_IN_A_DAY);
 			absanceRepository.save(Absance.builder().note("nothing special").absanceType(absanceTypeRepository.getById(1L)).employer(employerRepository.getEmployeeByUid(1L)).startDate(today).endDate(nextDay).build());
+
+			departRepository.save(Depart.builder().dateDepart(new Date()).dateDebut(new Date()).employer(employerRepository.getEmployeeByUid(1L)).motif("nothing").build());
 
 		};
 	}

@@ -14,6 +14,8 @@ public class DepartForm {
     private Long uid;
     private String motif;
     @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateDebut;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateDepart;
     private Long Employee;
 }

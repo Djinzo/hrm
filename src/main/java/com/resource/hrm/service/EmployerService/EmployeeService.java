@@ -19,4 +19,10 @@ public interface EmployeeService {
 	Employee removeEmployeeById(Long uid);
 	
 	List<Employee> getActiveEmployees();
+
+	List<Employee> getAllInAciveEmployee();
+
+	void activateEmployee(Long id);
+
+    List<Employee> getEmployeeDepart(int numberOfdate);
 }

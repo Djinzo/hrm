@@ -29,7 +29,7 @@
             <div class="mb-3">
                 <label for="innputdateAvvert" class="form-label">date Advertisement</label>
                 <input type="date" name="dateAvvert" class="form-control" id="innputdateAvvert"
-                       th:value="${discipline.dateAvvert}">
+                       th:value="${#dates.format(discipline.dateAvvert, 'yyyy-MM-dd')}">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

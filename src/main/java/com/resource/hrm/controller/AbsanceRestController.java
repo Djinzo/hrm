@@ -61,6 +61,9 @@ public class AbsanceRestController {
 
     @PostMapping("/save/doc")
     public void document(@RequestBody MultipartFile file,@RequestParam("id") String id) throws IOException {
+        if(!Files.exists(Paths.get(System.getProperty("user.home") + "/Docs"))){
+            Files.createDirectories(Paths.get(System.getProperty("user.home") + "/Docs"));
+        }
         Files.deleteIfExists(Paths.get(System.getProperty("user.home") + "/Docs").resolve(id+".pdf"));
         Files.copy(file.getInputStream(), Paths.get(System.getProperty("user.home") + "/Docs").resolve(id+".pdf"));
 

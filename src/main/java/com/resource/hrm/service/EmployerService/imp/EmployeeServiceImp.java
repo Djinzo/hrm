@@ -1,20 +1,31 @@
 package com.resource.hrm.service.EmployerService.imp;
 
+import com.resource.hrm.entity.Depart;
 import com.resource.hrm.entity.Employee;
+import com.resource.hrm.repository.DepartRepository;
 import com.resource.hrm.repository.EmployeeRepository;
 import com.resource.hrm.service.EmployerService.EmployeeService;
 
+import net.bytebuddy.matcher.FilterableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.DateUtils;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImp implements EmployeeService {
 	
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
+
+	@Autowired
+	private DepartRepository departRepository;
+
 	@Override
 	public void addEmployee(final Employee employer) {
 		employer.setColor((int)(Math.random() * 0x1000000));
@@ -52,5 +63,34 @@ public class EmployeeServiceImp implements EmployeeService {
 	public List<Employee> getActiveEmployees() {
 		return employeeRepository.getEmployeesByAcitve(true);
 	}
-	
+
+	@Override
+	public List<Employee> getAllInAciveEmployee() {
+		return employeeRepository.getEmployeesByAcitve(false);
+	}
+
+	@Override
+	public void activateEmployee(Long id) {
+		Employee employee = getEmployeeById(id);
+		employee.setAcitve(true);
+		employeeRepository.save(employee);
+	}
+
+	@Override
+	public List<Employee> getEmployeeDepart(int numberOfdate) {
+		List<Employee> activeEmployee = employeeRepository.getEmployeesByAcitve(true);
+		List<Employee> employeeDate = new ArrayList<>();
+		for(Employee e : activeEmployee){
+			Optional<Depart> optionalDepart = departRepository.findDepartByEmployer(e).stream().sorted((e1, e2)-> DateUtils.millisecond(e1.getDateDepart()) - DateUtils.millisecond(e2.getDateDepart())).findFirst();
+			if(optionalDepart.isPresent()){
+				Depart currDepart = optionalDepart.get();
+				if(currDepart.getDateDepart().getTime() - (new Date().getTime())<(numberOfdate * 86400000) ){
+					employeeDate.add(e);
+				}
+			}
+
+		}
+		return employeeDate;
+	}
+
 }
