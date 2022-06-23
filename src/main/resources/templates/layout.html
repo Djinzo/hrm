@@ -12,7 +12,8 @@
     <link th:href="@{/webjars/fullcalendar/main.min.css}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap-icons/font/bootstrap-icons.scss}"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <script th:href="@{/webjars/pdfjs/build/pdf.js}" />
+    <script th:href="@{/webjars/pdfjs/build/pdf.js}"></script>
+
 </head>
 <body>
 <div>
@@ -23,7 +24,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-            <a class="navbar-brand" href="/index"><img th:src="@{/img/pepsilogo.png}" width="5%">pepsi</a>
+            <a class="navbar-brand" href="/index">pepsi</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="/index">Home <!--<span class="sr-only">(current)</span>--></a>
@@ -40,14 +41,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/discipline">Discipline</a>
                 </li>
+
             </ul>
-            <dev class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-bell-fill" viewBox="0 0 16 16">
-                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                    </svg>
-                </button>
+            <dev class="form-inline my-2 my-lg-0 mr-1">
+                <div class="row">
+                    <div class="dropdown mr-2 ml-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            [[${#httpServletRequest.remoteUser}]]
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/password">Change password</a>
+                        </div>
+                    </div>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
             </dev>
         </div>
     </nav>
@@ -55,7 +74,7 @@
 
     </section>
     <footer>
-        todo
+
     </footer>
 
 </div>

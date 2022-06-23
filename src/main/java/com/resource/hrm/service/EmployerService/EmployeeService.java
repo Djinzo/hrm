@@ -25,4 +25,12 @@ public interface EmployeeService {
 	void activateEmployee(Long id);
 
     List<Employee> getEmployeeDepart(int numberOfdate);
+
+	void addToBlackList(Long uid);
+
+	List<Employee> getBlackListedEmployee();
+
+	void removeFromBlackList(Long uid);
+
+	Employee getEmployeeByCin(String cin);
 }

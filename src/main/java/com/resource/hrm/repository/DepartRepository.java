@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
-
+@RepositoryRestResource
+@CrossOrigin("*")
 public interface DepartRepository extends JpaRepository<Depart,Long> {
 
 

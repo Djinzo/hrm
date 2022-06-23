@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class EmployerController {
@@ -35,9 +36,22 @@ public class EmployerController {
 	@RequestMapping(value = "/employee/save", method = RequestMethod.POST)
 	public String saveEmployee(Model model, Employee employer) {
 		employer.setAcitve(true);
-		employeeService.editEmployee(employer);
-		model.addAttribute("employee", new Employee());
+		Employee e = employeeService.getEmployeeByCin(employer.getCin());
+
 		model.addAttribute("employeeList", employeeService.getActiveEmployees());
+		if(!Objects.isNull(e)){
+			if(e.getBlackListe()){
+				model.addAttribute("blackListedCin","this employee is blacklisted");
+				model.addAttribute("employee", employer);
+				return "employee";
+			}else if (Objects.isNull(employer.getUid())){
+				model.addAttribute("employeeAlreadyExist","this employee already exist in the database");
+				model.addAttribute("employee", employer);
+				return "employee";
+			}
+		}
+		model.addAttribute("employee", new Employee());
+		employeeService.editEmployee(employer);
 		return "employee";
 	}
 	

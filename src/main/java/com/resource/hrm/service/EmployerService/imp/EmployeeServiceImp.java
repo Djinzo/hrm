@@ -93,4 +93,30 @@ public class EmployeeServiceImp implements EmployeeService {
 		return employeeDate;
 	}
 
+	@Override
+	public void addToBlackList(Long uid) {
+		Employee e = employeeRepository.getEmployeeByUid(uid);
+		e.setBlackListe(true);
+		e.setAcitve(false);
+		employeeRepository.save(e);
+	}
+
+	@Override
+	public List<Employee> getBlackListedEmployee() {
+		return employeeRepository.getEmployeeByBlackListe(true);
+	}
+
+	@Override
+	public void removeFromBlackList(Long uid) {
+		Employee e = employeeRepository.getEmployeeByUid(uid);
+		e.setBlackListe(false);
+		e.setAcitve(true);
+		employeeRepository.save(e);
+	}
+
+	@Override
+	public Employee getEmployeeByCin(String cin){
+		return employeeRepository.getEmployeeByCin(cin);
+	}
+
 }
